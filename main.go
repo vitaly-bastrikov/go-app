@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"log"
 	"math"
 	"net/http"
@@ -28,9 +27,13 @@ var preferences []CatalogItem
 var products []CatalogItem
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // default fallback for local dev
+	}
+
 	router := gin.Default()
 	router.Use(cors.Default())
-
 	router.GET("/complete", CompleteHandler)
 	router.POST("/precompute", PrecomputeHandler)
 
@@ -39,8 +42,8 @@ func main() {
 	preferences = loadCatalogItems("preferences.json")
 	products = loadCatalogItems("products.json")
 
-	fmt.Println("🚀 Server running on http://localhost:8080")
-	router.Run(":8080")
+	log.Printf("🚀 Starting on port %s...", port)
+	router.Run("0.0.0.0:" + port)
 }
 
 func loadCatalogItems(filename string) []CatalogItem {
@@ -94,7 +97,9 @@ func GetEmbedding(text string) ([]float64, error) {
 	req := EmbedRequest{Text: text}
 	body, _ := json.Marshal(req)
 
-	resp, err := http.Post("https://embedding-service-ez96.onrender.com/embed", "application/json", bytes.NewBuffer(body))
+	// url := "https://embedding-service-ez96.onrender.com/embed"
+
+	resp, err := http.Post("http://localhost:8000/embed", "application/json", bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
