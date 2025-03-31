@@ -7,9 +7,13 @@ import (
 	"net/http"
 	"sort"
 	"strings"
+	"time"
 )
 
 func CompleteHandler(c *gin.Context) {
+
+	start := time.Now()
+
 	query := strings.TrimSpace(c.Query("q"))
 	if query == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing query"})
@@ -141,4 +145,7 @@ func CompleteHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, results)
+
+	log.Printf("⏱ /complete took %v for query: %s", time.Since(start), query)
+
 }
