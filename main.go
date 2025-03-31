@@ -94,7 +94,7 @@ func GetEmbedding(text string) ([]float64, error) {
 	req := EmbedRequest{Text: text}
 	body, _ := json.Marshal(req)
 
-	resp, err := http.Post("http://localhost:8000/embed", "application/json", bytes.NewBuffer(body))
+	resp, err := http.Post("https://embedding-service-ez96.onrender.com/embed", "application/json", bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
