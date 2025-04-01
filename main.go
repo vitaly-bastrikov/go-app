@@ -19,8 +19,6 @@ func main() {
 
 	log.Println("📦 Loading data...")
 	controllers.LoadCatalogItems("data/nava_items.json")
-	controllers.LoadCatalogItems("data/preferences.json")
-	controllers.LoadCatalogItems("data/products.json")
 	log.Println("✅ Data loaded")
 
 	embeddingURL := os.Getenv("EMBEDDING_URL")
