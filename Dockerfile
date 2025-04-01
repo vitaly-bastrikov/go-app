@@ -18,9 +18,13 @@ FROM alpine:latest
 
 WORKDIR /app
 
-# Copy the binary from the builder
+# Copy the binary
 COPY --from=builder /app/app .
 
-EXPOSE 8080
+# ✅ Copy the JSON data files too
+COPY --from=builder /app/nava_items.json .
+COPY --from=builder /app/preferences.json .
+COPY --from=builder /app/products.json .
 
+EXPOSE 8080
 CMD ["./app"]

@@ -1,4 +1,4 @@
-module github.com/vitaly-bastrikov/go-app
+module product-catalog/go-app
 
 go 1.23.0
 
