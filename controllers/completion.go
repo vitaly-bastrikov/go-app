@@ -25,19 +25,7 @@ func CompleteQuery(query string) []entity.ScoredItem {
 		return nil
 	}
 
-	allItems := append(append(navaItems, preferences...), products...)
-	itemTypeMap := map[string]string{}
-	for _, i := range navaItems {
-		itemTypeMap[i.ID] = "nava"
-	}
-	for _, i := range preferences {
-		itemTypeMap[i.ID] = "preference"
-	}
-	for _, i := range products {
-		itemTypeMap[i.ID] = "product"
-	}
-
-	return matchAllInParallel(queryEmbedding, strings.ToLower(query), allItems, itemTypeMap)
+	return matchAllInParallel(queryEmbedding, strings.ToLower(query), navaItems)
 }
 
 func cosineSimilarity(a, b []float64) float64 {
@@ -59,13 +47,13 @@ func cosineSimilarity(a, b []float64) float64 {
 	return dotProduct / (math.Sqrt(normA) * math.Sqrt(normB))
 }
 
-func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []entity.CatalogItem, itemTypeMap map[string]string) []entity.ScoredItem {
+func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []entity.SearchItem) []entity.ScoredItem {
 	const threshold = 0.1
 	const prefixBoost = 0.5
 	const fuzzyBoost = 0.3
 
 	numWorkers := runtime.NumCPU()
-	itemCh := make(chan entity.CatalogItem, len(allItems))
+	itemCh := make(chan entity.SearchItem, len(allItems))
 	resultCh := make(chan entity.ScoredItem, len(allItems))
 
 	var wg sync.WaitGroup
@@ -97,7 +85,7 @@ func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []
 
 				if score >= threshold {
 					resultCh <- entity.ScoredItem{
-						Type:  itemTypeMap[item.ID],
+						Type:  item.Type,
 						Name:  item.Name,
 						Score: score,
 						Boost: isPrefix || isFuzzy,

@@ -2,7 +2,7 @@
   {
     "id": "navigation_item_delivery_alcohol",
     "name": "delivery_alcohol",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -467,7 +467,7 @@
   {
     "id": "navigation_item_delivery_baby",
     "name": "delivery_baby",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -871,7 +871,7 @@
   {
     "id": "navigation_item_delivery_convenience",
     "name": "delivery_convenience",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "beverages",
       "snack",
@@ -1328,7 +1328,7 @@
   {
     "id": "navigation_item_delivery_flowers",
     "name": "delivery_flowers",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -1731,7 +1731,7 @@
   {
     "id": "navigation_item_delivery_grocery",
     "name": "delivery_grocery",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -2220,7 +2220,7 @@
   {
     "id": "navigation_item_delivery_personal_care",
     "name": "delivery_personal_care",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -2627,7 +2627,7 @@
   {
     "id": "navigation_item_delivery_pet_supplies",
     "name": "delivery_pet_supplies",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -3037,7 +3037,7 @@
   {
     "id": "navigation_item_delivery_pharmacy",
     "name": "delivery_pharmacy",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -3472,7 +3472,7 @@
   {
     "id": "navigation_item_delivery_restaurants",
     "name": "delivery_restaurants",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "delivery",
       "eats",
@@ -3982,7 +3982,7 @@
   {
     "id": "navigation_item_delivery_retail",
     "name": "delivery_retail",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -4392,7 +4392,7 @@
   {
     "id": "navigation_item_delivery_specialty_foods",
     "name": "delivery_specialty_foods",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "get",
       "delivery",
@@ -4797,7 +4797,7 @@
   {
     "id": "navigation_item_mobility_car_rentals",
     "name": "mobility_car_rentals",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Rentals",
       "Cars",
@@ -5218,7 +5218,7 @@
   {
     "id": "navigation_item_mobility_charter",
     "name": "mobility_charter",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Charters",
       "Bus",
@@ -5637,7 +5637,7 @@
   {
     "id": "navigation_item_mobility_hourly",
     "name": "mobility_hourly",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Hourly",
       "Tour",
@@ -6063,7 +6063,7 @@
   {
     "id": "navigation_item_mobility_local",
     "name": "mobility_local",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Explore",
       "Discover",
@@ -6498,7 +6498,7 @@
   {
     "id": "navigation_item_mobility_micromobility",
     "name": "mobility_micromobility",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "2-Wheels",
       "Local",
@@ -6924,7 +6924,7 @@
   {
     "id": "navigation_item_mobility_rider_item_delivery",
     "name": "mobility_rider_item_delivery",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Amazon",
       "in store",
@@ -7393,7 +7393,7 @@
   {
     "id": "navigation_item_mobility_rides",
     "name": "mobility_rides",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Go",
       "Cars",
@@ -7882,7 +7882,7 @@
   {
     "id": "navigation_item_mobility_teens",
     "name": "mobility_teens",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "teens",
       "teen",
@@ -8279,7 +8279,7 @@
   {
     "id": "navigation_item_mobility_transit_rider",
     "name": "mobility_transit_rider",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Cheaper",
       "Transit",
@@ -8683,7 +8683,7 @@
   {
     "id": "navigation_item_mobility_travel",
     "name": "mobility_travel",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Travels",
       "Planning",
@@ -9106,7 +9106,7 @@
   {
     "id": "navigation_item_mobility_uber_reserve",
     "name": "mobility_uber_reserve",
-    "internal_notes": "",
+    "type": "nava_item",
     "tags": [
       "Reserve",
       "Advance",
