@@ -6,8 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"../entity"
-	"../gateway"
+	"product-catalog/go-app/gateway"
 )
 
 func PrecomputeEmbeddings() error {
