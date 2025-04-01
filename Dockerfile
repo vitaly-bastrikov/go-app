@@ -21,10 +21,13 @@ WORKDIR /app
 # Copy the binary
 COPY --from=builder /app/app .
 
-# ✅ Copy the JSON data files too
-COPY --from=builder /app/nava_items.json .
-COPY --from=builder /app/preferences.json .
-COPY --from=builder /app/products.json .
+# Copy the data files
+COPY --from=builder /app/data/nava_items.json ./data/
+COPY --from=builder /app/data/preferences.json ./data/
+COPY --from=builder /app/data/products.json ./data/
+
+# Create data directory
+RUN mkdir -p data
 
 EXPOSE 8080
 CMD ["./app"]
