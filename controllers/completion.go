@@ -49,8 +49,10 @@ func cosineSimilarity(a, b []float64) float64 {
 
 func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []entity.SearchItem) []entity.ScoredItem {
 	const threshold = 0.1
-	const prefixBoost = 0.5
-	const fuzzyBoost = 0.3
+	const namePrefixBoost = 0.5
+	const nameFuzzyBoost = 0.3
+	const tagPrefixBoost = 0.2
+	const tagFuzzyBoost = 0.1
 
 	numWorkers := runtime.NumCPU()
 	itemCh := make(chan entity.SearchItem, len(allItems))
@@ -66,21 +68,48 @@ func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []
 				nameLower := strings.ToLower(item.Name)
 				score := cosineSimilarity(queryEmbedding, item.Embedding)
 
-				isPrefix := false
+				// Check for prefix and fuzzy matches in name and all tags
+				namePrefix := false
+				nameFuzzy := false
+				tagPrefix := false
+				tagFuzzy := false
+
+				// Check name
 				for _, word := range strings.Fields(nameLower) {
 					if strings.HasPrefix(word, queryLower) {
-						isPrefix = true
+						namePrefix = true
 						break
 					}
 				}
-
-				isFuzzy := fuzzy.MatchNormalizedFold(queryLower, nameLower)
-
-				if isPrefix {
-					score += prefixBoost
+				if fuzzy.MatchNormalizedFold(queryLower, nameLower) {
+					nameFuzzy = true
 				}
-				if isFuzzy {
-					score += fuzzyBoost
+
+				// Check all tags
+				for _, tag := range item.Tags {
+					tagLower := strings.ToLower(tag)
+					for _, word := range strings.Fields(tagLower) {
+						if strings.HasPrefix(word, queryLower) {
+							tagPrefix = true
+							break
+						}
+					}
+					if fuzzy.MatchNormalizedFold(queryLower, tagLower) {
+						tagFuzzy = true
+					}
+				}
+
+				if namePrefix {
+					score += namePrefixBoost
+				}
+				if nameFuzzy {
+					score += nameFuzzyBoost
+				}
+				if tagPrefix {
+					score += tagPrefixBoost
+				}
+				if tagFuzzy {
+					score += tagFuzzyBoost
 				}
 
 				if score >= threshold {
@@ -88,7 +117,6 @@ func matchAllInParallel(queryEmbedding []float64, queryLower string, allItems []
 						Type:  item.Type,
 						Name:  item.Name,
 						Score: score,
-						Boost: isPrefix || isFuzzy,
 					}
 				}
 			}

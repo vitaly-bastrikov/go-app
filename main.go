@@ -22,7 +22,9 @@ func main() {
 	log.Println("✅ Data loaded")
 
 	embeddingURL := os.Getenv("EMBEDDING_URL")
-	log.Printf("🔗 EMBEDDING_URL = %s", embeddingURL)
+	if embeddingURL == "" {
+		embeddingURL = "http://localhost:10000"
+	}
 
 	router := gin.Default()
 	router.Use(cors.Default())
@@ -36,6 +38,6 @@ func main() {
 	log.Printf("🚀 Starting on port %s...", port)
 	err := router.Run("0.0.0.0:" + port)
 	if err != nil {
-		log.Fatalf("❌ Failed to start server: %v", err)
+		log.Fatalf("Failed to start server: %v", err)
 	}
 }
